@@ -1,3 +1,8 @@
+# Etc
+*.txt
+*.pdf
+srcs/.env
+
 # Prerequisites
 *.d
 

@@ -6,9 +6,9 @@ services:
     networks:
       - inception
     build: ./requirements/mariadb/
+    image: mariadb
     env_file:
       - .env
-    # user: root
     volumes:
       - mariadb:/var/lib/mysql
     restart: unless-stopped
@@ -21,7 +21,10 @@ services:
       - inception
     depends_on:
       - wordpress
+    volumes:
+      - wordpress:/var/www
     build: ./requirements/nginx/
+    image: nginx
     env_file:
       - .env
     ports:
@@ -35,8 +38,9 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - wordpress:/var/www/wordpress
+      - wordpress:/var/www
     build: ./requirements/wordpress/
+    image: wordpress
     env_file:
       - .env
     expose:
@@ -50,6 +54,7 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/home/darrensdev/inception_volumes/wordpress'
+
   mariadb:
     driver: local
     driver_opts:
@@ -59,4 +64,5 @@ volumes:
 
 networks:
   inception:
+    name: inception
     driver: bridge

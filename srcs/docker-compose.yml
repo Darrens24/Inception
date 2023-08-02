@@ -31,12 +31,40 @@ services:
       - "443:443"
     restart: on-failure
 
+  redis:
+    container_name: redis
+    networks:
+      - inception
+    build: ./requirements/bonus/redis/
+    image: redis
+    env_file:
+      - .env
+    expose:
+      - "6379"
+    restart: on-failure
+
+  vsftpd:
+    container_name: vsftpd
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    build: ./requirements/bonus/ftp-server/
+    image: vsftpd
+    volumes:
+      - wordpress:/var/www/html
+    ports:
+      - "21:21"
+      - "60000-61000:60000-61000"
+    restart: always
+
   wordpress:
     container_name: wordpress
     networks:
       - inception
     depends_on:
       - mariadb
+      - redis
     volumes:
       - wordpress:/var/www
     build: ./requirements/wordpress/
@@ -66,3 +94,6 @@ networks:
   inception:
     name: inception
     driver: bridge
+
+###   here the different drivers available for docker-compose:    ###
+###   https://chat.openai.com/c/f41bdb90-93ac-400f-b216-645f436edb7e   ###

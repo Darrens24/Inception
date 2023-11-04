@@ -26,18 +26,18 @@
 #
 # echo "Let's go FTP !"
 
-    mkdir -p /var/www/html
+mkdir -p /var/www/html
 
-    cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak
-    mv /tmp/vsftpd.conf /etc/vsftpd/vsftpd.conf
+cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak
+mv /tmp/vsftpd.conf /etc/vsftpd/vsftpd.conf
 
-    # Add the FTP_USER, change his password and declare him as the owner of wordpress folder and all subfolders
-    adduser ed --disabled-password
-    echo "ed:secret" | /usr/sbin/chpasswd &> /dev/null
-    chown -R ed:ed /var/www/html
+# Add the FTP_USER, change his password and declare him as the owner of wordpress folder and all subfolders
+adduser ed --disabled-password
+echo "ed:secret" | /usr/sbin/chpasswd &> /dev/null
+chown -R ed:ed /var/www/html
 
-	#chmod +x /etc/vsftpd/vsftpd.conf
-    echo ed | tee -a /etc/vsftpd.userlist &> /dev/null
+#chmod +x /etc/vsftpd/vsftpd.conf
+echo ed | tee -a /etc/vsftpd.userlist &> /dev/null
 
 
 echo "FTP started on :21"

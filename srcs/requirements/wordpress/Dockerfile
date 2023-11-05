@@ -18,7 +18,10 @@ WORKDIR /var/www
 RUN wget https://wordpress.org/latest.zip \
   && unzip latest.zip && rm latest.zip \
   && cp -r wordpress/* . && rm -rf wordpress \
-  && chmod -R 777 wp-content 
+  # && mkdir ./wp-content/upgrade \
+  && chmod -R 777 wp-content
+# && chown -R root:root /var/www
+
 
 EXPOSE 9000
 
@@ -29,6 +32,9 @@ RUN sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php8/php-fpm.d/www.c
   && sed -i "s|;extension=curl|extension=ctype|g" /etc/php8/php.ini 
 
 ENTRYPOINT ["sh", "wp-config.sh"]
+
+# RUN chmod 777 /var/www/wp-content/upgrade
+
 
 CMD	["php-fpm8", "-F"]
 

@@ -21,8 +21,10 @@ services:
       - inception
     depends_on:
       - wordpress
+      - hugo
     volumes:
       - wordpress:/var/www
+      - hugo:/var/www/hugo
     build: ./requirements/nginx/
     image: nginx
     env_file:
@@ -58,6 +60,15 @@ services:
       - "60000-60100:60000-60100"
     restart: always
 
+  hugo:
+    container_name: hugo
+    networks:
+      - inception
+    build: ./requirements/bonus/hugo-static-website/
+    volumes:
+      - hugo:/var/www/hugo
+    restart: on-failure
+
   wordpress:
     container_name: wordpress
     networks:
@@ -75,6 +86,13 @@ services:
       - "9000"
     restart: on-failure
 
+  # adminer:
+  #   container_name: adminer
+  #   networks:
+  #     - inception
+  #   restart: on-failure
+
+
 volumes:
   wordpress:
     driver: local
@@ -89,6 +107,13 @@ volumes:
       type: 'none' 
       o: 'bind'
       device: '/home/darrensdev/inception_volumes/mariadb'
+
+  hugo:
+    driver: local
+    driver_opts:
+      type: 'none' 
+      o: 'bind'
+      device: '/home/darrensdev/inception_volumes/public'
 
 networks:
   inception:

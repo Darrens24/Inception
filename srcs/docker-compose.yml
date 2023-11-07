@@ -52,6 +52,8 @@ services:
       - inception
     depends_on:
       - wordpress
+    env_file:
+      - .env
     build: ./requirements/bonus/ftp-server/
     image: vsftpd
     volumes:

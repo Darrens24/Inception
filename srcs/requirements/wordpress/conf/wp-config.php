@@ -1,8 +1,5 @@
 <?php
 
-// define('DB_NAME', getenv('MYSQL_DB'));
-// define('DB_USER', getenv('MYSQL_USR'));
-// define('DB_PASSWORD', getenv('MYSQL_PSSWD'));
 define('DB_HOST', 'mariadb');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');

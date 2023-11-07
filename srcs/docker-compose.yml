@@ -22,6 +22,7 @@ services:
     depends_on:
       - wordpress
       - hugo
+      - adminer
     volumes:
       - wordpress:/var/www
       - hugo:/var/www/hugo
@@ -90,8 +91,23 @@ services:
     container_name: adminer
     networks:
       - inception
+    depends_on:
+      - mariadb
+    ports:
+      - "8080:8080"
     build: ./requirements/bonus/adminer/
     restart: on-failure
+
+  prometheus:
+    container_name: prometheus
+    networks:
+      - inception
+    build: ./requirements/bonus/prometheus/
+    volumes:
+      - prometheus:/prometheus
+      - ./requirements/bonus/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
 
 volumes:
   wordpress:
@@ -114,6 +130,13 @@ volumes:
       type: 'none' 
       o: 'bind'
       device: '/home/darrensdev/inception_volumes/public'
+
+  prometheus:
+    driver: local
+    driver_opts:
+      type: 'none' 
+      o: 'bind'
+      device: '/home/darrensdev/inception_volumes/prometheus'
 
 networks:
   inception:

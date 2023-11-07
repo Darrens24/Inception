@@ -30,22 +30,3 @@ EOF
 fi
 
 php-fpm8 -F
-
-# wget 	https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-# chmod 	+x wp-cli.phar
-# mv wp-cli.phar /usr/local/bin/wp 
-
-# wp core install --allow-root \
-#        		--url="localhost" \
-# 		--title=${WP_TITLE} \
-# 		--admin_user=${WP_ADMIN} \
-# 		--admin_password=${WP_ADMIN_PSSWD} \
-# 		--admin_email="${WP_ADMIN_MAIL}" \
-# 		--path="/var/www/wordpress"
-#
-#
-# wp user create ${WP_USR} "${WP_MAIL}" \
-# 		--user_pass=${WP_PSSWD} \
-# 		--role=author \
-# 		--allow-root
-

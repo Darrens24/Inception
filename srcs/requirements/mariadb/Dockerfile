@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM alpine:3.16.7
 
 ###   on alpine systemctl doesn't exist so we need openrc   ###
 

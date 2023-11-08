@@ -30,5 +30,7 @@ RUN sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php8/php-fpm.d/www.c
 
 ENTRYPOINT ["sh", "wp-config.sh"]
 
+RUN mkdir -p wp-content/upgrade && chmod -R 777 wp-content/upgrade
+
 CMD	["php-fpm8", "-F"]
 

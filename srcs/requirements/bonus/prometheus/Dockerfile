@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.16.7
 
 RUN addgroup -S prometheus && adduser -S prometheus -G prometheus
 

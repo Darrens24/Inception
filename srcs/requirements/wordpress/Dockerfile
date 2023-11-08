@@ -1,4 +1,4 @@
-FROM	alpine:3.16
+FROM	alpine:3.16.7
 
 ###   for wordpress, redis configs : /etc/php/php.ini and /etc/php/php.../www.conf   ###
 ###   WARNING locations changing with PhP versions, this one is for php8    ###
